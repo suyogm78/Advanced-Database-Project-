@@ -1,0 +1,506 @@
+
+SQL> insert into Customer values('1234','cust','john','902Nstipes','1000100','john@gmail.com','10');
+
+1 row created.
+
+SQL> insert into Customer values('1235','cust','sam','903Nstipes','1000101','sam@gmail.com','11');
+
+1 row created.
+
+SQL> insert into Customer values('1236','cust','tom','904Nstipes','1000102','tom@gmail.com','12');
+
+1 row created.
+
+SQL> insert into Customer values('1237','deal','john1','312SMorghan','9100000','john1@gmail.com','50');
+
+1 row created.
+
+SQL> insert into Customer values('1238','deal','sam1','313SMorghan','9100001','sam1@gmail.com','60');
+
+1 row created.
+
+SQL> insert into Customer values('1239','deal','tom1','314SMorghan','9100002','tom1@gmail.com','70');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into Review values('1','04-dec-1990','high resolution','150','2.5','good');
+
+1 row created.
+
+SQL> insert into Review values('2','10-nov-1993','camera quality','200','3.5','very good');
+
+1 row created.
+
+SQL> insert into Review values('3','24-dec-1993','touch pad','160','1.9','satisfied');
+
+1 row created.
+
+SQL> insert into Review values('4','07-jul-1992','sw-backup','143','2.9','ok');
+
+1 row created.
+
+SQL> insert into Review values('5','11-mar-1994','slow-processing','99','3.0','not good');
+
+1 row created.
+
+SQL> insert into Product values('8300','laptop','camera quality','320px','05-feb-2015');
+insert into Product values('8300','laptop','camera quality','320px','05-feb-2015')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ACM132.SYS_C0028594) violated
+
+
+SQL> insert into Product values('8300','laptop','camera quality','320px','05-feb-2015');
+insert into Product values('8300','laptop','camera quality','320px','05-feb-2015')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ACM132.SYS_C0028594) violated
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into Product values('8301','laptop','camera quality','320px','05-feb-2015');
+
+SQL> insert into Product values('8301','laptop','camera quality','320px','05-feb-2015');
+insert into Product values('8301','laptop','camera quality','320px','05-feb-2015')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ACM132.SYS_C0028594) violated
+
+
+SQL> insert into Product values('8301','laptop','camera quality','320px','05-feb-2015');
+insert into Product values('8301','laptop','camera quality','320px','05-feb-2015')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ACM132.SYS_C0028594) violated
+
+
+SQL> insert into Company values('901','Apple','seattle');
+
+1 row created.
+
+SQL> insert into Company values('902','Samsung','california');
+
+1 row created.
+
+SQL>  insert into Company values('903','Nokia','illinois');
+
+1 row created.
+
+SQL> insert into Company values('904','Jio','Hyderabad');
+
+1 row created.
+
+SQL> insert into Company values('905','reliance','nasik');
+
+1 row created.
+
+SQL> insert into ThirdParty values('Apple','8300','good cam','batterybackup','3.0');
+
+1 row created.
+
+SQL> insert into ThirdParty values('Apple','8300','good cam','batterybackup','3.0');
+insert into ThirdParty values('Apple','8300','good cam','batterybackup','3.0')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ACM132.SYS_C0029531) violated
+
+
+SQL> insert into ThirdParty values('Nokia','8303','highresolution','lowcam','2.5');
+
+1 row created.
+
+SQL> insert into ThirdParty values('Nokia','8303','highresolution','lowcam','2.5');
+insert into ThirdParty values('Nokia','8303','highresolution','lowcam','2.5')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ACM132.SYS_C0029531) violated
+
+
+SQL> insert into ThirdParty values('Jio','8302','gudbackup','resolutionlow','4.0');
+
+1 row created.
+
+SQL> insert into ThirdParty values('reliance','8304','gudbackup','resolutionlow','3.5');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into  Give values('1235','4');
+
+1 row created.
+
+SQL> insert into  Give values('1236','1');
+
+1 row created.
+
+SQL> insert into  Give values('1234','2');
+
+1 row created.
+
+SQL> insert into  Give values('1237','3');
+
+1 row created.
+
+SQL> insert into  Give values('1238','5');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into Buy values('1234','8301','03-jan-1993');
+
+1 row created.
+
+SQL> insert into Buy values('1235','8302','24-dec-2000');
+
+1 row created.
+
+SQL> insert into Buy values('1237','8300','12-dec-1992');
+
+1 row created.
+
+SQL> insert into Buy values('1238','8301','25-august-2015');
+
+1 row created.
+
+SQL> insert into Buy values('1236','8303','25-september-2016');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from CompanyHasProducts;
+select * from CompanyHasProducts
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> Create Table CompanyHasProduct(
+  Comp_Name Varchar2(15) NOT NULL,
+  Prod_Id Number(5) NOT NULL,
+  Prod_Desc Varchar2(20) NOT NULL,
+  FOREIGN KEY(Comp_Name) REFERENCES Company(Comp_Name),
+  FOREIGN KEY(Prod_Id) REFERENCES Product(Prod_Id),
+  7    Primary Key(Comp_Name,Prod_Id))
+  8  ;
+Create Table CompanyHasProduct(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop table CompanyHasProducts;
+drop table CompanyHasProducts
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> Create Table CompanyHasProduct(
+  Comp_Name Varchar2(15) NOT NULL,
+  Prod_Id Number(5) NOT NULL,
+  Prod_Desc Varchar2(20) NOT NULL,
+  FOREIGN KEY(Comp_Name) REFERENCES Company(Comp_Name),
+  FOREIGN KEY(Prod_Id) REFERENCES Product(Prod_Id),
+  7    Primary Key(Comp_Name,Prod_Id));
+Create Table CompanyHasProduct(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> desc CompanyHasProduct;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COMP_NAME                                 NOT NULL VARCHAR2(15)
+ PROD_ID                                   NOT NULL NUMBER(5)
+ PROD_DESC                                 NOT NULL VARCHAR2(20)
+
+SQL> select * from CompanyHasProduct;
+
+no rows selected
+
+SQL> select * from Customer;
+
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE
+--------------- ------------
+      1238 deal            sam1            313SMorghan        9100001
+sam1@gmail.com            60
+
+      1234 cust            john            902Nstipes         1000100
+john@gmail.com            10
+
+      1235 cust            sam             903Nstipes         1000101
+sam@gmail.com             11
+
+
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE
+--------------- ------------
+      1236 cust            tom             904Nstipes         1000102
+tom@gmail.com             12
+
+      1237 deal            john1           312SMorghan        9100000
+john1@gmail.com           50
+
+      1239 deal            tom1            314SMorghan        9100002
+tom1@gmail.com            70
+
+
+6 rows selected.
+
+SQL> selct * from Company;
+SP2-0734: unknown command beginning "selct * fr..." - rest of line ignored.
+SQL> select * from Company;
+
+   COMP_ID COMP_NAME       COMP_ADD
+---------- --------------- ---------------
+       901 Apple           seattle
+       902 Samsung         california
+       903 Nokia           illinois
+       904 Jio             Hyderabad
+       905 reliance        nasik
+
+SQL> select * from Product;
+
+   PROD_ID PROD_NAME       PROD_F          PROD_S          PROD_RELE
+---------- --------------- --------------- --------------- ---------
+      8300 laptop          camera quality  320px           05-FEB-15
+      8301 palmtop         touch pad       1024px          08-JUN-16
+      8302 mobile          backup          16GB            10-OCT-13
+      8303 ipad            front cam       720px           19-MAR-08
+      8304 ipod            storage         8GB             28-JUL-12
+
+SQL> insert into CompanyHasProduct VALUES('901','8304','Satisfiable');
+insert into CompanyHasProduct VALUES('901','8304','Satisfiable')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (ACM132.SYS_C0029546) violated - parent key not
+found
+
+
+SQL> desc CompanyHasProduct;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COMP_NAME                                 NOT NULL VARCHAR2(15)
+ PROD_ID                                   NOT NULL NUMBER(5)
+ PROD_DESC                                 NOT NULL VARCHAR2(20)
+
+SQL> insert into CompanyHasProduct VALUES('APPLE','8304','Satisfiable');
+insert into CompanyHasProduct VALUES('APPLE','8304','Satisfiable')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (ACM132.SYS_C0029546) violated - parent key not
+found
+
+
+SQL> insert into CompanyHasProduct VALUES('Apple','8304','Satisfiable');
+
+1 row created.
+
+SQL> insert into CompanyHasProduct VALUES('Nokia','8300','Excellent');
+
+1 row created.
+
+SQL> insert into CompanyHasProduct VALUES('Reliance','8302','Average');
+insert into CompanyHasProduct VALUES('Reliance','8302','Average')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (ACM132.SYS_C0029546) violated - parent key not
+found
+
+
+SQL> insert into CompanyHasProduct VALUES('reliance','8302','Average');
+
+1 row created.
+
+SQL> insert into CompanyHasProduct VALUES('jio','8301','Average');
+insert into CompanyHasProduct VALUES('jio','8301','Average')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (ACM132.SYS_C0029546) violated - parent key not
+found
+
+
+SQL> insert into CompanyHasProduct VALUES('Jio','8301','Average');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from ThirdParty ;
+
+COMP_NAME          PROD_ID POSITIVE_COMM   NEGATIVE_COMM   T_RATING
+--------------- ---------- --------------- --------------- ---------------
+Apple                 8300 good cam        batterybackup   3.0
+reliance              8304 gudbackup       resolutionlow   3.5
+Jio                   8302 gudbackup       resolutionlow   4.0
+Nokia                 8303 highresolution  lowcam          2.5
+
+select R_ID,M_RATING,R_COMMENT
+  2  FROM review
+  3    3  WHERE M_RATING>2.0;
+  2  FROM review
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+select R_ID,M_RATING,R_COMMENT
+  2  FROM review
+  3   WHERE M_RATING>2.0;
+  2  FROM review
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT R_ID,M_RATING,R_COMMENT
+  2  FROM Review
+  3  WHERE M_RATING>2.0;
+
+      R_ID   M_RATING R_COMMENT
+---------- ---------- ---------------
+         1          3 good
+         4          3 ok
+         5          3 not good
+         2          4 very good
+
+/////////?? select * from Review,Customer,Give
+  2    WHERE Customer.CUST_ID = Give.CUST_ID AND give.R_ID=Review.R_ID AND CUST_TYPE='deal';
+
+      R_ID R_DATE    S_PRODFEATURE   S_PRODPRICE       M_RATING R_COMMENT
+---------- --------- --------------- --------------- ---------- ---------------
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE    CUST_ID       R_ID
+--------------- ------------ ---------- ----------
+         3 24-DEC-93 touch pad       160                      2 satisfied
+      1237 deal            john1           312SMorghan        9100000
+john1@gmail.com           50       1237          3
+
+         5 11-MAR-94 slow-processing 99                       3 not good
+      1238 deal            sam1            313SMorghan        9100001
+sam1@gmail.com            60       1238          5
+
+      R_ID R_DATE    S_PRODFEATURE   S_PRODPRICE       M_RATING R_COMMENT
+---------- --------- --------------- --------------- ---------- ---------------
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE    CUST_ID       R_ID
+--------------- ------------ ---------- ----------
+
+
+SELECT * from customer
+  2    2  ORDER BY CUST_LICENSE DESC;
+  2  ORDER BY CUST_LICENSE DESC
+  *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SELECT * from customer
+  2    2  ORDER BY CUST_LICENSE DESC;
+  2  ORDER BY CUST_LICENSE DESC
+  *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT * from customer
+  2  ORDER BY CUST_LICENSE DESC;
+
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE
+--------------- ------------
+      1239 deal            tom1            314SMorghan        9100002
+tom1@gmail.com            70
+
+      1238 deal            sam1            313SMorghan        9100001
+sam1@gmail.com            60
+
+      1237 deal            john1           312SMorghan        9100000
+john1@gmail.com           50
+
+
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE
+--------------- ------------
+      1236 cust            tom             904Nstipes         1000102
+tom@gmail.com             12
+
+      1235 cust            sam             903Nstipes         1000101
+sam@gmail.com             11
+
+      1234 cust            john            902Nstipes         1000100
+john@gmail.com            10
+
+
+6 rows selected.
+
+SELECT  AVG(T_RATING)
+  2     FROM ThirdParty;
+
+AVG(T_RATING)
+-------------
+         3.25
+
+select CUST_NAME,CUST_ADDRESS,CUST_PH,PROD_ID,B_ORDERDATE
+  2  FROM BUY,CUSTOMER
+  3  WHERE BUY.CUST_ID=CUSTOMER.CUST_ID
+  4   AND BUY.B_ORDERDATE='03-JAN-93';
+  2  FROM BUY,CUSTOMER
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT CUST_NAME,CUST_ADDRESS,CUST_PH,PROD_ID,B_ORDERDATE
+  2  FROM BUY,CUSTOMER
+  3  WHERE BUY,CUT_ID=CUSTOMER.CUST_ID
+  4  AND BUY.B_ORDERDATE='03-JAN-93';
+WHERE BUY,CUT_ID=CUSTOMER.CUST_ID
+         *
+ERROR at line 3:
+ORA-00920: invalid relational operator
+
+
+SQL> SELECT CUST_NAME,CUST_ADDRESS,CUST_PH,PROD_ID,B_ORDERDATE
+  2  FROM BUY,CUSTOMER
+  3  SELECT CUST_NAME,CUST_ADDRESS,CUST_PH,PROD_ID,B_ORDERDATE
+  4
+SQL> SELECT CUST_NAME,CUST_ADDRESS,CUST_PH,PROD_ID,B_ORDERDATE
+  2  FROM BUY,CUSTOMER
+  3  WHERE BUY.CUST_ID=CUSTOMER.CUST_ID
+  4  AND BUY.B_OrderDate='03-JAN-93';
+
+CUST_NAME       CUST_ADDRESS       CUST_PH    PROD_ID B_ORDERDA
+--------------- --------------- ---------- ---------- ---------
+john            902Nstipes         1000100       8301 03-JAN-93
+
+SQL> commit;
+
+Commit complete.
+

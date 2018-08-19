@@ -1,0 +1,12 @@
+DROP DATABASE LINK LinkS
+/
+
+CREATE  DATABASE LINK LinkS CONNECT TO
+    "SPM122"
+    IDENTIFIED BY "dz19oLOt"
+    USING '(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL =
+    TCP) (Host = oracle1.wiu.edu) (PORT = 1521))) (CONNECT_DATA = (SID
+    = toolman )))'
+/
+
+Select * from judge@LinkS;

@@ -1,0 +1,11 @@
+Create or Replace Trigger ProductIns
+	Before Insert 
+	ON Product
+	FOR EACH ROW
+	
+BEGIN
+		Insert Into Product@LinkA VALUES(:new.Prod_Id, :new.Prod_Name, :new.Prod_Price); 
+		Insert Into Product@LinkK VALUES(:new.Prod_Id, :new.Prod_Name, :new.Prod_Price); 
+END ProductIns;
+/
+

@@ -1,0 +1,11 @@
+DROP DATABASE LINK LinkK
+/
+CREATE  DATABASE LINK LinkK CONNECT TO
+    "KRL102" 
+    IDENTIFIED BY "cs522"
+    USING '(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL =
+    TCP) (Host = oracle1.wiu.edu) (PORT = 1521))) (CONNECT_DATA = (SID = toolman)))'
+/
+
+select * from judge@LinkK;
+

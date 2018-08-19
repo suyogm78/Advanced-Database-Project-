@@ -1,0 +1,99 @@
+SQL> select * from ThirdParty;
+
+COMP_NAME          PROD_ID POSITIVE_COMM   NEGATIVE_COMM   T_RATING
+--------------- ---------- --------------- --------------- ---------------
+Apple                 8300 good cam        batterybackup   3.0
+reliance              8304 gudbackup       resolutionlow   3.5
+Jio                   8302 gudbackup       resolutionlow   4.0
+Nokia                 8303 highresolution  lowcam          2.5
+
+SQL> commit;
+
+Commit complete.
+
+SELECT R_ID,M_RATING,R_COMMENT
+     FROM Review
+  3       WHERE M_RATING>2.0;
+
+      R_ID   M_RATING R_COMMENT
+---------- ---------- ---------------
+         1          3 good
+         4          3 ok
+         5          3 not good
+         2          4 very good
+
+select * from Review,Customer,Give
+     WHERE Customer.CUST_ID = Give.CUST_ID AND give.R_ID=Review.R_ID AND CUST_TYPE='deal';
+
+      R_ID R_DATE    S_PRODFEATURE   S_PRODPRICE       M_RATING R_COMMENT
+---------- --------- --------------- --------------- ---------- ---------------
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE    CUST_ID       R_ID
+--------------- ------------ ---------- ----------
+         3 24-DEC-93 touch pad       160                      2 satisfied
+      1237 deal            john1           312SMorghan        9100000
+john1@gmail.com           50       1237          3
+
+         5 11-MAR-94 slow-processing 99                       3 not good
+      1238 deal            sam1            313SMorghan        9100001
+sam1@gmail.com            60       1238          5
+
+      R_ID R_DATE    S_PRODFEATURE   S_PRODPRICE       M_RATING R_COMMENT
+---------- --------- --------------- --------------- ---------- ---------------
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE    CUST_ID       R_ID
+--------------- ------------ ---------- ----------
+
+
+SELECT * from customer
+  2     ORDER BY CUST_LICENSE DESC;
+
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE
+--------------- ------------
+      1239 deal            tom1            314SMorghan        9100002
+tom1@gmail.com            70
+
+      1238 deal            sam1            313SMorghan        9100001
+sam1@gmail.com            60
+
+      1237 deal            john1           312SMorghan        9100000
+john1@gmail.com           50
+
+
+   CUST_ID CUST_TYPE       CUST_NAME       CUST_ADDRESS       CUST_PH
+---------- --------------- --------------- --------------- ----------
+CUST_EMAIL      CUST_LICENSE
+--------------- ------------
+      1236 cust            tom             904Nstipes         1000102
+tom@gmail.com             12
+
+      1235 cust            sam             903Nstipes         1000101
+sam@gmail.com             11
+
+      1234 cust            john            902Nstipes         1000100
+john@gmail.com            10
+
+
+6 rows selected.
+
+SELECT  AVG(T_RATING)
+  2       FROM ThirdParty;
+
+AVG(T_RATING)
+-------------
+         3.25
+
+ SELECT CUST_NAME,CUST_ADDRESS,CUST_PH,PROD_ID,B_ORDERDATE
+   FROM BUY,CUSTOMER
+    WHERE BUY.CUST_ID=CUSTOMER.CUST_ID
+      AND BUY.B_OrderDate='03-JAN-93';
+
+CUST_NAME       CUST_ADDRESS       CUST_PH    PROD_ID B_ORDERDA
+--------------- --------------- ---------- ---------- ---------
+john            902Nstipes         1000100       8301 03-JAN-93
+
+SQL>

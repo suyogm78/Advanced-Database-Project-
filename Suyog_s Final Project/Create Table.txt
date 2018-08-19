@@ -1,0 +1,82 @@
+Create Table Review(
+    R_Id Number(5) Primary Key,
+    R_Date Date,
+    S_ProdFeature Varchar2(15) NOT NULL,
+    S_ProdPrice Varchar2(15) NOT NULL,
+    M_Rating Number(10) NOT NULL,
+    R_Comment Varchar2(15) NOT NULL);
+
+CREATE INDEX REVIEW$RATING ON Review(M_Rating);
+
+
+CREATE CLUSTER Custom(Cust_Id Number(5));
+
+
+Create Table Customer(
+Cust_Id  Number(5) Primary Key,
+Cust_Type Varchar2(15) NOT NULL,
+Cust_Name Varchar2(15) NOT NULL,
+Cust_Address Varchar2(15) NOT NULL,
+Cust_PH Number(10) NOT NULL,
+Cust_Email Varchar2(15) NOT NULL,
+Cust_License Number(20) NOT NULL)
+CLUSTER Custom(Cust_ID);
+
+Create Table Give(
+Cust_Id Number(5) NOT NULL,
+R_Id Number(5) NOT NULL,
+Primary Key(Cust_Id,R_Id),
+FOREIGN KEY(Cust_Id) REFERENCES Customer(Cust_Id),
+FOREIGN KEY(R_Id) REFERENCES Review(R_Id))
+CLUSTER Custom(Cust_Id);
+
+CREATE INDEX idCust ON CLUSTER Custom;
+
+
+CREATE CLUSTER Third (Comp_Name VARCHAR2(15))
+SIZE 512 SINGLE TABLE HASHKEYS 2000;
+
+Create Table Company(
+    Comp_Id Number(5) NOT NULL,
+    Comp_Name Varchar2(15) Primary Key,
+    Comp_Add Varchar2(15) NOT NULL);
+
+Create Table Product(
+   Prod_Id Number(5) Primary Key,
+   Prod_Name Varchar2(15) NOT NULL,
+  Prod_F Varchar2(15) NOT NULL,
+   Prod_S Varchar2(15) NOT NULL,
+       Prod_ReleaseDate Date);
+
+
+Create Table ThirdParty(
+  Comp_Name Varchar2(15) NOT NULL,
+  Prod_Id Number(5) NOT NULL,
+  Positive_Comm Varchar2(15) NOT NULL,
+  Negative_Comm Varchar2(15) NOT NULL ,
+  T_Rating Varchar2(15) NOT NULL,
+  Primary Key(Comp_Name,Prod_Id),
+  FOREIGN KEY(Prod_Id) REFERENCES Product(Prod_Id),
+  FOREIGN KEY(Comp_Name) REFERENCES Company(Comp_Name))
+   CLUSTER Third (Comp_Name);
+
+Create Table Buy(
+Cust_Id Number(5) ,
+Prod_Id Number(5) ,
+B_OrderDate Date NOT NULL ,
+FOREIGN KEY(Cust_Id) REFERENCES Customer(Cust_Id),
+FOREIGN KEY(Prod_Id) REFERENCES Product(Prod_Id),
+ Primary Key(Cust_Id,Prod_Id));
+
+
+Create Table CompanyHasProduct(
+  Comp_Name Varchar2(15) NOT NULL,
+  Prod_Id Number(5) NOT NULL,
+  Prod_Desc Varchar2(20) NOT NULL,
+  FOREIGN KEY(Comp_Name) REFERENCES Company(Comp_Name),
+  FOREIGN KEY(Prod_Id) REFERENCES Product(Prod_Id),
+   Primary Key(Comp_Name,Prod_Id));
+
+
+
+
